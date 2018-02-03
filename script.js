@@ -46,7 +46,7 @@ $(document).ready(function(){
                     gameWon();
                 } else {
                 $(this).removeClass(map[$(this).data("value")] + "On");
-                newRound(true);
+                newRound();
                 }
             }
         } else {
@@ -170,15 +170,13 @@ $(document).ready(function(){
         multiplier = 0;
         flashScreen();
         setTimeout(() => {
-            newRound(true);
+            newRound();
         }, 2750);
     }
-    function newRound(giveNewVal) {
-        if (giveNewVal){
-            sequences.push(Math.floor(Math.random() * 4));
-        }
+    function newRound() {            
+        sequences.push(Math.floor(Math.random() * 4));
         playerSeq = [];
-          flashSeq();
+        flashSeq();
     }
     function wrongChoice(){
         if (strict == 1){
