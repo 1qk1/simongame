@@ -19,7 +19,6 @@ $(document).ready(function(){
             gamestate = 1;
             initialize();
         } else {
-            gamestate = 0;
             gameOff();
         }
     });
@@ -100,6 +99,7 @@ $(document).ready(function(){
         return true;
     }
     function gameOff(){
+        gamestate = 0;
         clearInterval(flashInt);
         clearInterval(flashSeq);
         $("#screen > h2").removeClass("textOn");
