@@ -140,22 +140,3 @@ p{
 	font-size: 14px;
 	font-family: Roboto;
 }
-#win{
-	margin: 20px auto;
-	display: block;
-	text-align: center;
-}
-@media (max-width: 468px){
-	#game{
-		padding: auto;
-	}
-	.simonbutton{
-		width: 50%;
-		height: 15em;
-	}
-	#controls{
-		top: 0;
-		bottom: 0;
-	
-	}
-}
