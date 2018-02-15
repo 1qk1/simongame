@@ -10,9 +10,11 @@ $(document).ready(function(){
     var multiplier = 0;
     var multiplier2 = 0;
     var map = ["green", "red", "yellow", "blue"];
-    var audio = [];
-    for (var i = 0; i <= 4;i++){
-        audio.push(document.querySelector("audio[data-value='" + i + "']"));
+    var sounds = {
+        0: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
+        1: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
+        2: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
+        3: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
     }
     $("#onoff").on("click", function(){
         if (gamestate == 0){
@@ -33,7 +35,8 @@ $(document).ready(function(){
     });
     $(".simonbutton").mousedown(function(){
         if ($(this).hasClass("unclickable")){return;}
-        playAudio($(this).data("value"));
+        var sound = new Audio(sounds[$(this).data("value")]);
+        sound.play();
         $(this).addClass(map[$(this).data("value")] + "On");
     });
     $(".simonbutton").mouseup(function(){
@@ -59,7 +62,9 @@ $(document).ready(function(){
         $(".simonbutton").addClass("unclickable");
         flashInt = setInterval(function(){
             $("#green").addClass("greenOn");
-            audio[0].play();
+            // var sound = new Audio(sounds[$(this).data("value")]);
+            // sound.play();
+            console.log($(this).data("value"));
             $("#blue").addClass("blueOn");
             setTimeout(() => {
                 $("#green").removeClass("greenOn");
@@ -84,10 +89,6 @@ $(document).ready(function(){
                 }, 1000);
             }
         }, 500);
-    }
-    function playAudio(num){
-        audio[num].currentTime = 0;
-        audio[num].play();
     }
     function valuesMatch(arr1, arr2){
         if (arr1.length != arr2.length){return false;}
@@ -146,7 +147,8 @@ $(document).ready(function(){
         }, 500);
         seqInt = setInterval(function(){
             $("#" + map[sequences[seqNum]]).addClass(map[sequences[seqNum]] + "On");
-            playAudio(sequences[seqNum]);
+            var sound = new Audio(sounds[sequences[seqNum]]);
+            sound.play();
             setTimeout(() => {
                 $("#" + map[sequences[seqNum]]).removeClass(map[sequences[seqNum]] + "On");
                 if (gamestate == 0) {
