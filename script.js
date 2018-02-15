@@ -11,10 +11,16 @@ $(document).ready(function(){
     var multiplier2 = 0;
     var map = ["green", "red", "yellow", "blue"];
     var sounds = {
-        0: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
-        1: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
-        2: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
-        3: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
+        0: "sounds/simonSound1.mp3",
+        1: "sounds/simonSound2.mp3",
+        2: "sounds/simonSound3.mp3",
+        3: "sounds/simonSound4.mp3"
+    }
+    function playAudio(num) {
+        var sound = new Howl({
+            src: [sounds[num]]
+        });
+        sound.play();
     }
     $("#onoff").on("click", function(){
         if (gamestate == 0){
@@ -35,8 +41,7 @@ $(document).ready(function(){
     });
     $(".simonbutton").mousedown(function(){
         if ($(this).hasClass("unclickable")){return;}
-        var sound = new Audio(sounds[$(this).data("value")]);
-        sound.play();
+        playAudio($(this).data("value"));
         $(this).addClass(map[$(this).data("value")] + "On");
     });
     $(".simonbutton").mouseup(function(){
@@ -147,8 +152,7 @@ $(document).ready(function(){
         }, 500);
         seqInt = setInterval(function(){
             $("#" + map[sequences[seqNum]]).addClass(map[sequences[seqNum]] + "On");
-            var sound = new Audio(sounds[sequences[seqNum]]);
-            sound.play();
+            playAudio(String(sequences[seqNum]));
             setTimeout(() => {
                 $("#" + map[sequences[seqNum]]).removeClass(map[sequences[seqNum]] + "On");
                 if (gamestate == 0) {
